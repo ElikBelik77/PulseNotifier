@@ -58,6 +58,11 @@ public class PulseGen implements Observable<Float> {
             }
             this.currentPulse = data[ptr++];
 
+            if (this.stressed && rand.nextInt(100) < 10/*this.currentPulse <= 115 && this.currentPulse >= 60*/) {
+                this.stressed = false;
+                this.currentMeanPulse = normal_pulse_resting;
+                this.currentStdPulse = normal_pulse_deviation;
+            }
             for (Observer<Float> observer : _Observers) {
                 observer.notify((float) this.currentPulse, this);
             }
