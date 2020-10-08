@@ -29,7 +29,7 @@ public class HeartbeatService extends Service implements Observer<Float> {
     private BollingerBands _Bands;
 
     public HeartbeatService() {
-        _Bands = new BollingerBands(10, 1);
+        _Bands = new BollingerBands(14, 1);
     }
 
     @Nullable
@@ -127,7 +127,7 @@ public class HeartbeatService extends Service implements Observer<Float> {
             try {
                 if (!_Bands.checkValue(value) && !VoiceRecorder.get().isRecording) {
                     startWorking();
-                } else if (VoiceRecorder.get().isRecording) {
+                } else if (_Bands.checkValue(value) && VoiceRecorder.get().isRecording) {
                     stopWorking();
                     _Bands.appendData(value);
                 }
