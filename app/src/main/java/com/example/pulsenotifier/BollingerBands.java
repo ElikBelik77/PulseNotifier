@@ -59,4 +59,4 @@ public class BollingerBands {
         return (float) Math.sqrt((double) (standardDeviation / values.size()));
     }
 }
-}
+
