@@ -67,4 +67,15 @@ public class EventActivity extends AppCompatActivity implements OnMapReadyCallba
             AudioPlayer.get().playAudio(eventEntity.recordingPath);
         }
     }
+
+    public void onReturnClick(View view) {
+        // make sure we were clicked but the return button
+        if (view.getId() == R.id.returnButton) {
+            // return to main activity
+
+            // DON'T KNOW IF IT WORKS. FOUND IT ON STACK OVERFLOW:
+            // https://stackoverflow.com/questions/24610527/how-do-i-get-a-button-to-open-another-activity
+            startActivity(new Intent(EventActivity.this, MainActivity.class));
+        }
+    }
 }

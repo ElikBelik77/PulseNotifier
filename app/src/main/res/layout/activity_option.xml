@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".OptionActivity">
 
+    <ImageButton
+        android:id="@+id/returnButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="centerInside"
+        android:layout_alignParentEnd="false"
+        android:src="@drawable/back_button"
+        android:onClick="onReturnClick" />
+
+<!--
     <Button
         android:id="@+id/returnButton"
 
@@ -14,7 +24,7 @@
         android:layout_alignParentEnd="false"
 
         android:onClick="onReturnClick"
-        android:text="return{need image}" />
+        android:text="return{need image}" />     -->
 
 
     <GridLayout
@@ -34,7 +44,7 @@
             android:layout_columnSpan="2"
             android:layout_gravity="center_horizontal"
             android:padding="10dp"
-            android:text="Private Information" />
+            android:text="@string/option_title" />
 
 
         <TextView
@@ -45,7 +55,7 @@
 
             android:padding="10dp"
 
-            android:text="Name:" />
+            android:text="@string/enter_name" />
 
 
         <EditText
@@ -57,7 +67,7 @@
             android:padding="10dp"
             android:singleLine="true"
 
-            android:text="Enter Name"
+            android:text="@string/enter_name_edit"
             android:autofillHints="Enter Name"
             android:inputType="textPersonName"
             tools:ignore="LabelFor" />
@@ -71,7 +81,7 @@
 
             android:padding="10dp"
 
-            android:text="Birthday:" />
+            android:text="@string/enter_bday" />
 
 
         <EditText
@@ -83,7 +93,7 @@
             android:padding="10dp"
             android:singleLine="true"
 
-            android:text="Enter Birthday"
+            android:text="@string/enter_bday_edit"
             android:autofillHints="Enter your birth date"
             android:inputType="date"
             tools:ignore="LabelFor" />
@@ -98,7 +108,7 @@
             android:layout_columnSpan="2"
             android:layout_gravity="center_horizontal"
             android:padding="10dp"
-            android:text="Private Information" />
+            android:text="@string/option_subtitle" />
 
 
         <TextView
@@ -109,7 +119,7 @@
 
             android:padding="10dp"
 
-            android:text="Emergency Phone:" />
+            android:text="@string/emergency_phone" />
 
 
         <EditText
@@ -121,7 +131,7 @@
             android:padding="10dp"
             android:singleLine="true"
 
-            android:text="Enter Emergency Phone"
+            android:text="@string/emergency_phone_edit"
             android:autofillHints="Enter a valid phone number"
             android:inputType="phone"
             android:digits="0123456789+- "
@@ -134,11 +144,10 @@
             android:layout_height="wrap_content"
             android:layout_columnSpan="2"
 
-            android:layout_alignParentEnd="false"
             android:layout_gravity="center_horizontal"
 
             android:onClick="onSubmitClick"
-            android:text="Save Changes" />
+            android:text="@string/submit_button_text" />
 
 
     </GridLayout>
