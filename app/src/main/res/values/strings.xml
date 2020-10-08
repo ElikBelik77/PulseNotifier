@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PulseNotifier</string>
+    <string name="media_player_button_play">Play</string>
+    <string name="media_player_button_stop">Stop</string>
+    <string name="date_text_view">Date:</string>
+    <string name="time_text_view">Time:</string>
+    <string name="map_text_view">Map</string>
+    <string name="recording_text_view">Recording</string>
 </resources>
