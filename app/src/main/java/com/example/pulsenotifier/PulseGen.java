@@ -15,7 +15,7 @@ public class PulseGen implements Observable<Float> {
     //    private static final int min_pulse = 20;
     private static final int normal_pulse_resting = 80;
     private static final int normal_pulse_deviation = 15;
-    private static final int stress_pulse_deviation = 5;
+    private static final int stress_pulse_deviation = 15;
     //    private static final int max_pulse = 220;
     private int currentMeanPulse;
     private int currentStdPulse;
