@@ -14,7 +14,7 @@ public class PulseGen implements Observable<Float> {
     //    private static final int min_pulse = 20;
     private static final int normal_pulse_resting = 80;
     private static final int normal_pulse_deviation = 30;
-    private static final int stress_pulse_deviation = 15;
+    private static final int stress_pulse_deviation = 5;
     //    private static final int max_pulse = 220;
     private int currentMeanPulse;
     private int currentStdPulse;
@@ -43,20 +43,20 @@ public class PulseGen implements Observable<Float> {
         Random rand = new Random();
         while(alive){
             this.currentPulse = (int)(rand.nextGaussian()*this.currentStdPulse + this.currentMeanPulse);
-            if (!stressed && this.currentPulse > 115 && (int)rand.nextInt(100) >= 50){
+            if (!this.stressed && this.currentPulse > 115 && (int)rand.nextInt(100) >= 50){
                     this.currentMeanPulse = 130; // average rate in a flight-or-fight situation
                     this.currentStdPulse = stress_pulse_deviation;
                     this.stressed = true;
             }
 
-            if (!stressed && this.currentPulse < 60 && (int)rand.nextInt(101) >= 50){
+            if (!this.stressed && this.currentPulse < 60 && (int)rand.nextInt(101) >= 50){
                 this.currentMeanPulse = 45;
                 this.currentStdPulse = stress_pulse_deviation;
                 this.stressed = true;
             }
 
-            if (stressed && this.currentPulse <= 115 && this.currentPulse >= 60) {
-                stressed = false;
+            if (this.stressed && this.currentPulse <= 115 && this.currentPulse >= 60) {
+                this.stressed = false;
                 this.currentMeanPulse = normal_pulse_resting;
                 this.currentStdPulse = normal_pulse_deviation;
             }
