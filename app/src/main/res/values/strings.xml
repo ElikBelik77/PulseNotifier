@@ -10,4 +10,8 @@
     <string name="name_pref_name">UserName</string>
     <string name="bday_pref_name">UserBirthday</string>
     <string name="phone_pref_name">UserEmergencyPhone</string>
+    <string name="app_switch_button_start">Start</string>
+    <string name="app_switch_button_stop">Stop</string>
+    <string name="app_switch_text_view">Toggle safe mode</string>
+    <string name="events_text_view">Events</string>
 </resources>

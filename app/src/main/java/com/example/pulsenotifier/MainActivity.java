@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,17 +19,20 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     public static List<EventState> events = new ArrayList<EventState>();
     public static ArrayAdapter listAdapter = null;
+    final private int GREEN = 0xFF00FF00;
+    final private int RED = 0xFFFF0000;
+    private Boolean isActive = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        events.add(new EventState("hey",0,0,"hey"));
-        events.add(new EventState("hey",0,0,"hey"));
-        events.add(new EventState("hey",0,0,"hey"));
-        events.add(new EventState("hey",0,0,"hey"));
-        events.add(new EventState("hey",0,0,"hey"));
         setContentView(R.layout.activity_main);
         listAdapter = new ArrayAdapter<EventState>(this,
                 R.layout.activity_listview, events);
+
+        Button toggleButton = (Button) findViewById(R.id.appSwitchButton);
+        toggleButton.setText(getString(R.string.app_switch_button_stop));
+        toggleButton.setBackgroundColor(RED);
+
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(listAdapter);
         final MainActivity mainActivity = this;
@@ -40,6 +44,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         this.startForegroundService(new Intent(this, HeartbeatService.class));
+    }
+
+    public void toggleButtonOnClick(View view) {
+        Button toggleButton = (Button) findViewById(R.id.appSwitchButton);
+        Log.d("EventActivity", "Toggle button pressed");
+        if (!isActive) {
+            toggleButton.setText(getString(R.string.app_switch_button_stop));
+            toggleButton.setBackgroundColor(RED);
+            isActive = true;
+        } else {
+            toggleButton.setText(getString(R.string.app_switch_button_start));
+            toggleButton.setBackgroundColor(GREEN);
+            isActive = false;
+        }
     }
 }
