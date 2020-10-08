@@ -12,4 +12,5 @@ If the user is unable to respond to the notification, (due to being unconscious,
 ## Technical Details
 The application is based on `Java`, it can access the vital through `Anroid OS` & `Wear OS API's`. To detect anomalies we use a statistical technique from stock analysis called 'Bollinger Bands'. 
 
+## Contributors
 Chen Goldshtein, Tal Nakar, Yonathan Lifshits, Eliran Ziv.
