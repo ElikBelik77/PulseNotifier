@@ -28,7 +28,7 @@ public class AudioPlayer {
     }
 
     public static AudioPlayer get() {
-        if(instance != null) {
+        if(instance == null) {
             instance = new AudioPlayer();
         }
         return instance;

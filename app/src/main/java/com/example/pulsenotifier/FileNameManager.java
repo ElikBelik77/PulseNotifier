@@ -3,6 +3,7 @@ package com.example.pulsenotifier;
 import android.util.Log;
 
 import java.io.File;
+import java.nio.file.Paths;
 
 public class FileNameManager {
     private int current = 0;
@@ -22,8 +23,8 @@ public class FileNameManager {
         int maxName = 0;
         try {
             for (File file : files) {
-                if (Integer.parseInt(file.getName()) > maxName) {
-                    maxName = Integer.parseInt(file.getName());
+                if (Integer.parseInt((Paths.get(file.getName()).getFileName().toString()).split("\\.")[0]) > maxName) {
+                    maxName = Integer.parseInt((Paths.get(file.getName()).getFileName().toString()).split("\\.")[0]);
                 }
             }
         } catch (NullPointerException e) {
@@ -43,7 +44,9 @@ public class FileNameManager {
         return fileName;
     }
 
-
+    public String getCurrent() {
+        return this.baseDirectory + "/" + (this.current-1) + ".3gp";
+    }
     public static void initialize(String localDir, int maxRecordings) {
         if (instance == null) {
             instance = new FileNameManager(localDir, maxRecordings);

@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">PulseNotifier</string>
+    <string name="media_player_button_play">Play</string>
+    <string name="media_player_button_stop">Stop</string>
+    <string name="date_text_view">Date:</string>
+    <string name="time_text_view">Time:</string>
+    <string name="map_text_view">Map</string>
+    <string name="recording_text_view">Recording</string>
+    <string name="preferences_name">SharedPreferences</string>
+    <string name="name_pref_name">UserName</string>
+    <string name="bday_pref_name">UserBirthday</string>
+    <string name="phone_pref_name">UserEmergencyPhone</string>
+    <string name="app_switch_button_start">Start</string>
+    <string name="app_switch_button_stop">Stop</string>
+    <string name="app_switch_text_view">Toggle safe mode</string>
+    <string name="events_text_view">Events</string>
 </resources>
