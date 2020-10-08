@@ -11,15 +11,16 @@ public class VoiceRecorder {
     private MediaRecorder recorder;
 
     private VoiceRecorder() {
+
+    }
+
+
+    public void StartRecording(String fileName) {
         this.recorder = new MediaRecorder();
         this.recorder.reset();
         this.recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         this.recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         this.recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-    }
-
-
-    public void StartRecording(String fileName) {
         this.recorder.setOutputFile(fileName);
         try {
             this.recorder.prepare();
@@ -32,6 +33,7 @@ public class VoiceRecorder {
     public void StopRecording() {
         this.recorder.stop();
         this.recorder.release();
+        this.recorder = null;
     }
 
     public static VoiceRecorder get() {

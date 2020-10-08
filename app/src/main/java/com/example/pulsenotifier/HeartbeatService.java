@@ -21,9 +21,11 @@ public class HeartbeatService extends Service implements Observer<Float> {
     private static final String NOTIF_CHANNEL_ID = "10001";
     private NotificationChannel _notificationChannel;
     private BollingerBands _Bands;
+
     public HeartbeatService() {
-        _Bands = new BollingerBands(10,1);
+        _Bands = new BollingerBands(10, 1);
     }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -39,7 +41,7 @@ public class HeartbeatService extends Service implements Observer<Float> {
         // do your jobs here
         //sensorMgr.registerListener(this,heartRate,SensorManager.SENSOR_DELAY_NORMAL);
 
-        //FileNameManager.initialize(getExternalCacheDir().getAbsolutePath(), 5);
+        FileNameManager.initialize(getExternalCacheDir().getAbsolutePath(), 5);
         startForeground();
         return super.onStartCommand(intent, flags, startId);
     }
@@ -67,6 +69,7 @@ public class HeartbeatService extends Service implements Observer<Float> {
         sensor.bitPulse();
 
     }
+
     public void setNotification(String text) {
         Intent notificationIntent = new Intent(this, MainActivity.class);
 
@@ -81,16 +84,23 @@ public class HeartbeatService extends Service implements Observer<Float> {
                 .setContentIntent(pendingIntent)
                 .build());
     }
+
     public void startWorking() {
         try {
             setNotification("Recording voice");
             VoiceRecorder recorder = VoiceRecorder.get();
             String recordingFileName = FileNameManager.get().getNext();
             recorder.StartRecording(recordingFileName);
-            SystemClock.sleep(10000);
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void stopWorking() {
+        try {
+            VoiceRecorder recorder = VoiceRecorder.get();
             recorder.StopRecording();
-            AudioPlayer player = AudioPlayer.get();
-            player.playAudio(recordingFileName);
         } catch (Exception e) {
 
         }
@@ -102,11 +112,15 @@ public class HeartbeatService extends Service implements Observer<Float> {
             try {
                 if (!_Bands.checkValue(value)) {
                     startWorking();
+                } else {
+                    stopWorking();
+                    _Bands.appendData(value);
                 }
             } catch (Exception e) {
                 Log.e("Notify", "Bollinger band is not loaded");
             }
+        } else {
+            _Bands.appendData(value);
         }
-        _Bands.appendData(value);
     }
 }
