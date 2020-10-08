@@ -36,7 +36,6 @@ public class EventActivity extends AppCompatActivity implements OnMapReadyCallba
                         "Date: %s, (x, y): (%d, %d)",
                 event.date, event.xLoc, event.yLoc));
         TextView dateText = (TextView) findViewById(R.id.dateValueTextView);
-        TextView timeText = (TextView) findViewById(R.id.timeValueTextView);
         dateText.setText(event.date);
 
         this.eventLocation = new LatLng(event.xLoc, event.yLoc);
