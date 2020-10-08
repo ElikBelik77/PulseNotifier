@@ -13,6 +13,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.media.audiofx.DynamicsProcessing;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
@@ -27,7 +28,8 @@ public class HeartbeatService extends Service implements Observer<Float> {
 
     private static final int NOTIF_ID = 1;
     private static final String NOTIF_CHANNEL_ID = "10001";
-    private NotificationChannel notificationChannel;
+    private NotificationChannel _notificationChannel;
+    private BollingerBands _Bands;
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -58,17 +60,20 @@ public class HeartbeatService extends Service implements Observer<Float> {
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            this.notificationChannel = new NotificationChannel(NOTIF_CHANNEL_ID,
+            this._notificationChannel = new NotificationChannel(NOTIF_CHANNEL_ID,
                     "YOUR_CHANNEL_NAME",
                     NotificationManager.IMPORTANCE_DEFAULT);
-            this.notificationChannel.setDescription("Pulse Notifications");
-            mNotificationManager.createNotificationChannel(this.notificationChannel);
+            this._notificationChannel.setDescription("Pulse Notifications");
+            mNotificationManager.createNotificationChannel(this._notificationChannel);
 
         }
     }
 
     @Override
     public void notify(Float value, Observer<Float> sender) {
+        if (_Bands.hasValue()) {
 
+        }
+        _Bands.appendData(value);
     }
 }
