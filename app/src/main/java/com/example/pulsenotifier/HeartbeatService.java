@@ -114,7 +114,7 @@ public class HeartbeatService extends Service implements Observer<Float> {
     }
 
     public void notify(Float value, Observable<Float> sender) {
-        setNotification("New value " + value);
+//        setNotification("New value " + value);
         if (_Bands.hasValue()) {
             try {
                 if (!_Bands.checkValue(value) && !VoiceRecorder.get().isRecording) {

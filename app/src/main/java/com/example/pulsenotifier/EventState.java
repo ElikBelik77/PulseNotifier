@@ -15,4 +15,8 @@ public class EventState implements Serializable {
         this.yLoc = yLoc;
         this.recordingPath = recordingPath;
     }
+    @Override
+    public String toString() {
+        return String.format("%s %s", date, time);
+    }
 }
