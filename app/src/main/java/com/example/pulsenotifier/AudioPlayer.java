@@ -14,11 +14,12 @@ public class AudioPlayer {
     private MediaPlayer player;
 
     private AudioPlayer() {
-        this.player = new MediaPlayer();
+
     }
 
     public void playAudio(String fileName) {
         try {
+            this.player = new MediaPlayer();
             player.setDataSource(fileName);
             player.prepare();
             player.start();

@@ -21,6 +21,7 @@ public class EventActivity extends AppCompatActivity implements OnMapReadyCallba
     private Boolean isPlayingRecording = false;
     private LatLng eventLocation;
     private EventState eventEntity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,26 +52,15 @@ public class EventActivity extends AppCompatActivity implements OnMapReadyCallba
     }
 
     public void recordingButtonOnClick(View view) {
-        Button recordingButton = (Button) findViewById(R.id.recordingButton);
-        Log.d("EventActivity", "Recording button pressed");
-        if (!isPlayingRecording) {
-            recordingButton.setText(getString(R.string.media_player_button_stop));
-        } else {
-            recordingButton.setText(getString(R.string.media_player_button_play));
+        final Button recordingButton = (Button) findViewById(R.id.recordingButton);
+        if (isPlayingRecording) {
             isPlayingRecording = false;
+            recordingButton.setText("Stop");
+            AudioPlayer.get().stopAudio();
+        } else {
+            isPlayingRecording = true;
+            recordingButton.setText("Play");
+            AudioPlayer.get().playAudio(eventEntity.recordingPath);
         }
-        recordingButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(isPlayingRecording) {
-                    isPlayingRecording = false;
-
-                    AudioPlayer.get().stopAudio();
-                }
-                else {
-                    isPlayingRecording = true;
-                    AudioPlayer.get().playAudio(eventEntity.recordingPath);
-                }
-            }
-        });
     }
 }

@@ -44,30 +44,24 @@ public class PulseGen implements Observable<Float> {
 
     public void bitPulse() {
         Random rand = new Random();
+        int[] data = new int[100];
+        for (int i = 0; i < 100; i++) {
+            data[i] = 100;
+            if (i > 70) {
+                data[i] = 50;
+            }
+        }
+        int ptr = 0;
         while (alive) {
-            this.currentPulse = (int) (rand.nextGaussian() * this.currentStdPulse + this.currentMeanPulse);
-            // UPPER STRESS 5%:
-            if (!this.stressed && rand.nextInt(100) >= 95) {
-                this.currentMeanPulse = 130; // average rate in a flight-or-fight situation
-                this.currentStdPulse = stress_pulse_deviation;
-                this.stressed = true;
+            if (ptr == 100) {
+                ptr = 0;
             }
-            // LOWER STRESS 5%:
-            if (!this.stressed && rand.nextInt(100) <= 4) {
-                this.currentMeanPulse = 45;
-                this.currentStdPulse = stress_pulse_deviation;
-                this.stressed = true;
-            }
+            this.currentPulse = data[ptr++];
 
-            if (this.stressed && rand.nextInt(100) < 10/*this.currentPulse <= 115 && this.currentPulse >= 60*/) {
-                this.stressed = false;
-                this.currentMeanPulse = normal_pulse_resting;
-                this.currentStdPulse = normal_pulse_deviation;
-            }
             for (Observer<Float> observer : _Observers) {
                 observer.notify((float) this.currentPulse, this);
             }
-            SystemClock.sleep(1000);
+            SystemClock.sleep(200);
         }
     }
 

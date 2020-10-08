@@ -29,7 +29,7 @@ public class HeartbeatService extends Service implements Observer<Float> {
     private BollingerBands _Bands;
 
     public HeartbeatService() {
-        _Bands = new BollingerBands(14, 2);
+        _Bands = new BollingerBands(30, 1);
     }
 
     @Nullable
@@ -118,18 +118,21 @@ public class HeartbeatService extends Service implements Observer<Float> {
             Date date = new Date();
             MainActivity.events.add(new EventState(dateFormat.format(date), 0, 0, recordingFileName));
             MainActivity.listAdapter.notifyDataSetChanged();
+            Log.e("New File", recordingFileName);
         } catch (Exception e) {
         }
     }
 
     public void notify(Float value, Observable<Float> sender) {
-        Log.d("Notify",String.valueOf(value));
         if (_Bands.hasValue()) {
             try {
                 if (!_Bands.checkValue(value) && !VoiceRecorder.get().isRecording) {
                     startWorking();
                 } else if (_Bands.checkValue(value) && VoiceRecorder.get().isRecording) {
                     stopWorking();
+
+                }
+                if (!VoiceRecorder.get().isRecording) {
                     _Bands.appendData(value);
                 }
             } catch (Exception e) {
@@ -138,5 +141,6 @@ public class HeartbeatService extends Service implements Observer<Float> {
         } else {
             _Bands.appendData(value);
         }
+
     }
 }
