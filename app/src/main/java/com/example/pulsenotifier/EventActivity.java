@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,28 +20,30 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class EventActivity extends AppCompatActivity implements OnMapReadyCallback {
     private Boolean isPlayingRecording = false;
     private LatLng eventLocation;
-
+    private EventState eventEntity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-
         Intent intent = getIntent();
         final EventState event = (EventState) intent.getSerializableExtra("event");
+        eventEntity = event;
 
         Log.d("EventActivity", "EventActivity Created successfully");
         assert event != null;
         Log.d("EventActivity", String.format("Event data: " +
-                        "Date: %s, time: %s, (x, y): (%d, %d)",
-                        event.date, event.time, event.xLoc, event.yLoc));
+                        "Date: %s, (x, y): (%d, %d)",
+                event.date, event.xLoc, event.yLoc));
         TextView dateText = (TextView) findViewById(R.id.dateValueTextView);
         TextView timeText = (TextView) findViewById(R.id.timeValueTextView);
         dateText.setText(event.date);
-        timeText.setText(event.time);
+
         this.eventLocation = new LatLng(event.xLoc, event.yLoc);
     }
 
-    /** Called when the map is ready. */
+    /**
+     * Called when the map is ready.
+     */
     @Override
     public void onMapReady(GoogleMap map) {
         Marker marker = map.addMarker(new MarkerOptions().position(this.eventLocation));
@@ -52,10 +55,22 @@ public class EventActivity extends AppCompatActivity implements OnMapReadyCallba
         Log.d("EventActivity", "Recording button pressed");
         if (!isPlayingRecording) {
             recordingButton.setText(getString(R.string.media_player_button_stop));
-            isPlayingRecording = true;
         } else {
             recordingButton.setText(getString(R.string.media_player_button_play));
             isPlayingRecording = false;
         }
+        recordingButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(isPlayingRecording) {
+                    isPlayingRecording = false;
+
+                    AudioPlayer.get().stopAudio();
+                }
+                else {
+                    isPlayingRecording = true;
+                    AudioPlayer.get().playAudio(eventEntity.recordingPath);
+                }
+            }
+        });
     }
 }

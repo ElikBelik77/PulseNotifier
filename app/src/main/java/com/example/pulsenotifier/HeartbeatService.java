@@ -9,10 +9,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.provider.CalendarContract;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class HeartbeatService extends Service implements Observer<Float> {
@@ -107,7 +113,9 @@ public class HeartbeatService extends Service implements Observer<Float> {
             VoiceRecorder recorder = VoiceRecorder.get();
             recorder.StopRecording();
             String recordingFileName = FileNameManager.get().getCurrent();
-            //MainActivity.raiseEvent(new EventState("today","22:00", 0,0, recordingFileName));
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
+            Date date = new Date();
+            MainActivity.events.add(new EventState(dateFormat.format(date), 0, 0, recordingFileName));
         } catch (Exception e) {
 
         }
