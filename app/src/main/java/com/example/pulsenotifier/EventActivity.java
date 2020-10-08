@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -39,6 +40,9 @@ public class EventActivity extends AppCompatActivity implements OnMapReadyCallba
         dateText.setText(event.date);
 
         this.eventLocation = new LatLng(event.xLoc, event.yLoc);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     /**
@@ -46,19 +50,20 @@ public class EventActivity extends AppCompatActivity implements OnMapReadyCallba
      */
     @Override
     public void onMapReady(GoogleMap map) {
-        Marker marker = map.addMarker(new MarkerOptions().position(this.eventLocation));
-//        markerPerth.setTag(0);
+        Marker marker = map.addMarker(new MarkerOptions().position(new LatLng(31.920600,35.040350)));
+
+//      markerPerth.setTag(0);
     }
 
     public void recordingButtonOnClick(View view) {
         final Button recordingButton = (Button) findViewById(R.id.recordingButton);
         if (isPlayingRecording) {
             isPlayingRecording = false;
-            recordingButton.setText("Stop");
+            recordingButton.setText("Play");
             AudioPlayer.get().stopAudio();
         } else {
             isPlayingRecording = true;
-            recordingButton.setText("Play");
+            recordingButton.setText("Stop");
             AudioPlayer.get().playAudio(eventEntity.recordingPath);
         }
     }

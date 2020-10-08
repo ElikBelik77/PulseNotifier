@@ -15,4 +15,5 @@
     <string name="app_switch_text_view">Toggle safe mode</string>
     <string name="events_text_view">Events</string>
     <string name="refresh_text_view">Refresh</string>
+    <string name="google_maps_key">AIzaSyDVw-Ts0or7FQwX88MazM9CJ6jv0XBiqAA</string>
 </resources>
