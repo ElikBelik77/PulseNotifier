@@ -109,6 +109,7 @@ public class HeartbeatService extends Service implements Observer<Float> {
     }
 
     public void stopWorking() {
+        setNotification("Pulse sensor is running in the background");
         try {
             VoiceRecorder recorder = VoiceRecorder.get();
             recorder.StopRecording();
@@ -123,6 +124,7 @@ public class HeartbeatService extends Service implements Observer<Float> {
 
     public void notify(Float value, Observable<Float> sender) {
 //        setNotification("New value " + value);
+        Log.d("Notify",String.valueOf(value));
         if (_Bands.hasValue()) {
             try {
                 if (!_Bands.checkValue(value) && !VoiceRecorder.get().isRecording) {
