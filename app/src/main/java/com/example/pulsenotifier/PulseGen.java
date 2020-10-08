@@ -44,18 +44,18 @@ public class PulseGen implements Observable<Float> {
         while(alive){
             this.currentPulse = (int)(rand.nextGaussian()*this.currentStdPulse + this.currentMeanPulse);
             if (!stressed && this.currentPulse > 115 && (int)rand.nextInt(100) >= 50){
-                    this.currentMeanPulse = 128; // average rate in a flight-or-fight situation
+                    this.currentMeanPulse = 130; // average rate in a flight-or-fight situation
                     this.currentStdPulse = stress_pulse_deviation;
                     this.stressed = true;
             }
 
             if (!stressed && this.currentPulse < 60 && (int)rand.nextInt(101) >= 50){
-                this.currentMeanPulse = 50;
+                this.currentMeanPulse = 45;
                 this.currentStdPulse = stress_pulse_deviation;
                 this.stressed = true;
             }
 
-            if (stressed && this.currentPulse <= 120 && this.currentPulse >= 50) {
+            if (stressed && this.currentPulse <= 115 && this.currentPulse >= 60) {
                 stressed = false;
                 this.currentMeanPulse = normal_pulse_resting;
                 this.currentStdPulse = normal_pulse_deviation;
