@@ -29,7 +29,7 @@ public class HeartbeatService extends Service implements Observer<Float> {
     private BollingerBands _Bands;
 
     public HeartbeatService() {
-        _Bands = new BollingerBands(14, 1);
+        _Bands = new BollingerBands(14, 2);
     }
 
     @Nullable
@@ -123,7 +123,6 @@ public class HeartbeatService extends Service implements Observer<Float> {
     }
 
     public void notify(Float value, Observable<Float> sender) {
-//        setNotification("New value " + value);
         Log.d("Notify",String.valueOf(value));
         if (_Bands.hasValue()) {
             try {
