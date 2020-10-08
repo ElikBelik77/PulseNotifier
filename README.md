@@ -10,4 +10,4 @@ As we all know there are many factors that can change heartrate and vital signs,
 If the user is unable to respond to the notification, (due to being unconscious, or unable to move) the app will automatically call for help, record audio and gps location.
 
 ## Technical Details
-The application is based on java, it can access the vital through anroid OS & wear OS API's. To detect anomalies we use a statisticall technique from stock analysis called 'Bollinger Bands'. 
+The application is based on java, it can access the vital through anroid OS & wear OS API's. To detect anomalies we use a statistical technique from stock analysis called 'Bollinger Bands'. 
