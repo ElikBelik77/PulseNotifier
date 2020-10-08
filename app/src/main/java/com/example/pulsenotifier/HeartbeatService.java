@@ -116,8 +116,8 @@ public class HeartbeatService extends Service implements Observer<Float> {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
             Date date = new Date();
             MainActivity.events.add(new EventState(dateFormat.format(date), 0, 0, recordingFileName));
+            MainActivity.listAdapter.notifyDataSetChanged();
         } catch (Exception e) {
-
         }
     }
 

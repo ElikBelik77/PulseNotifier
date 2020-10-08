@@ -17,15 +17,20 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static List<EventState> events = new ArrayList<EventState>();
-
+    public static ArrayAdapter listAdapter = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        events.add(new EventState("hey",0,0,"hey"));
+        events.add(new EventState("hey",0,0,"hey"));
+        events.add(new EventState("hey",0,0,"hey"));
+        events.add(new EventState("hey",0,0,"hey"));
+        events.add(new EventState("hey",0,0,"hey"));
         setContentView(R.layout.activity_main);
-        ArrayAdapter adapter = new ArrayAdapter<EventState>(this,
+        listAdapter = new ArrayAdapter<EventState>(this,
                 R.layout.activity_listview, events);
         ListView listView = (ListView) findViewById(R.id.listView);
-        listView.setAdapter(adapter);
+        listView.setAdapter(listAdapter);
         final MainActivity mainActivity = this;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
