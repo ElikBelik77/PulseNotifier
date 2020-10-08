@@ -19,7 +19,7 @@ public class VoiceRecorder {
     }
 
 
-    public void StartRecord(String fileName) {
+    public void StartRecording(String fileName) {
         this.recorder.setOutputFile(fileName);
         try {
             this.recorder.prepare();

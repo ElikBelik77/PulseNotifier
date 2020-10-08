@@ -22,7 +22,7 @@ public class HeartrateSensor implements Observable<Float>, SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_HEART_RATE) {
             for (Observer<Float> observer : this._Observers) {
-                observer.notify(event.values[0], observer);
+                observer.notify(event.values[0], this);
             }
         }
     }

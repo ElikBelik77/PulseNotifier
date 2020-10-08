@@ -19,7 +19,7 @@ public class BollingerBands {
     }
 
     public boolean checkValue(float value) throws Exception {
-        if (this.hasValue()) {
+        if (!this.hasValue()) {
             throw new Exception("Bollinger is not ready for data processsing");
         }
         return (value >= BollingerBands.mean(this.data) - this.k * BollingerBands.STD(this.data) && value <= BollingerBands.mean(this.data) + this.k * BollingerBands.STD(this.data)) ;
