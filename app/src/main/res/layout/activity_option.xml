@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OptionActivity">
+
+    <Button
+        android:id="@+id/returnButton"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="false"
+
+        android:onClick="onReturnClick"
+        android:text="return{need image}" />
+
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/returnButton"
+        android:columnCount="2"
+        android:rowCount="6">
+
+
+        <TextView
+            android:id="@+id/privateInformationTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_columnSpan="2"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="Private Information" />
+
+
+        <TextView
+            android:id="@+id/nameTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:padding="10dp"
+
+            android:text="Name:" />
+
+
+        <EditText
+            android:id="@+id/nameEditText"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:padding="10dp"
+            android:singleLine="true"
+
+            android:text="Enter Name"
+            android:autofillHints="Enter Name"
+            android:inputType="textPersonName"
+            tools:ignore="LabelFor" />
+
+
+        <TextView
+            android:id="@+id/birthdayTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:padding="10dp"
+
+            android:text="Birthday:" />
+
+
+        <EditText
+            android:id="@+id/birthdayEditText"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:padding="10dp"
+            android:singleLine="true"
+
+            android:text="Enter Birthday"
+            android:autofillHints="Enter your birth date"
+            android:inputType="date"
+            tools:ignore="LabelFor" />
+
+
+        <TextView
+            android:id="@+id/titleTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_columnSpan="2"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="Private Information" />
+
+
+        <TextView
+            android:id="@+id/emergencyPhoneTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:padding="10dp"
+
+            android:text="Emergency Phone:" />
+
+
+        <EditText
+            android:id="@+id/emergencyPhoneEditText"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:padding="10dp"
+            android:singleLine="true"
+
+            android:text="Enter Emergency Phone"
+            android:autofillHints="Enter a valid phone number"
+            android:inputType="phone"
+            android:digits="0123456789+- "
+            tools:ignore="LabelFor" />
+
+        <Button
+            android:id="@+id/submitButton"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="2"
+
+            android:layout_alignParentEnd="false"
+            android:layout_gravity="center_horizontal"
+
+            android:onClick="onSubmitClick"
+            android:text="Save Changes" />
+
+
+    </GridLayout>
+
+
+</RelativeLayout>
