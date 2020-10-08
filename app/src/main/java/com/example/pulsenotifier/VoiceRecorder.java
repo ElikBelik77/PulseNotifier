@@ -9,7 +9,7 @@ import java.io.IOException;
 public class VoiceRecorder {
     private static VoiceRecorder instance;
     private MediaRecorder recorder;
-
+    public boolean isRecording = false;
     private VoiceRecorder() {
 
     }
@@ -27,13 +27,16 @@ public class VoiceRecorder {
         } catch (IOException e) {
             Log.e("Record", "prepare() failed");
         }
+        this.isRecording = true;
         this.recorder.start();
+
     }
 
     public void StopRecording() {
         this.recorder.stop();
         this.recorder.release();
         this.recorder = null;
+        this.isRecording = false;
     }
 
     public static VoiceRecorder get() {

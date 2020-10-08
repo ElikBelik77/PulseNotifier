@@ -7,11 +7,12 @@ public class EventState implements Serializable {
     public String time;
     public int xLoc;
     public int yLoc;
-
-    public EventState(String date, String time, int xLoc, int yLoc) {
+    public String recordingPath;
+    public EventState(String date, String time, int xLoc, int yLoc, String recordingPath) {
         this.date = date;
         this.time = time;
         this.xLoc = xLoc;
         this.yLoc = yLoc;
+        this.recordingPath = recordingPath;
     }
 }

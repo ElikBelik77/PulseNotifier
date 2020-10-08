@@ -48,7 +48,7 @@ public class HeartbeatService extends Service implements Observer<Float> {
 
     private void startForeground() {
 
-        PulseGen sensor = PulseGen.get();
+        final PulseGen sensor = PulseGen.get();
         sensor.add(this);
 
         Intent notificationIntent = new Intent(this, MainActivity.class);
@@ -66,7 +66,12 @@ public class HeartbeatService extends Service implements Observer<Float> {
             mNotificationManager.createNotificationChannel(this._notificationChannel);
             setNotification("Pulse sensor is running the background");
         }
-        sensor.bitPulse();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                sensor.bitPulse();
+            }
+        }).start();
 
     }
 
@@ -101,6 +106,8 @@ public class HeartbeatService extends Service implements Observer<Float> {
         try {
             VoiceRecorder recorder = VoiceRecorder.get();
             recorder.StopRecording();
+            String recordingFileName = FileNameManager.get().getCurrent();
+            //MainActivity.raiseEvent(new EventState("today","22:00", 0,0, recordingFileName));
         } catch (Exception e) {
 
         }
@@ -110,9 +117,9 @@ public class HeartbeatService extends Service implements Observer<Float> {
         setNotification("New value " + value);
         if (_Bands.hasValue()) {
             try {
-                if (!_Bands.checkValue(value)) {
+                if (!_Bands.checkValue(value) && !VoiceRecorder.get().isRecording) {
                     startWorking();
-                } else {
+                } else if (VoiceRecorder.get().isRecording) {
                     stopWorking();
                     _Bands.appendData(value);
                 }
